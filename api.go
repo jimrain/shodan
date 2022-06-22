@@ -3,16 +3,17 @@ package shodan
 import (
 	"encoding/json"
 	"fmt"
+	"log"
 	"net/http"
 )
 
 type APIInfo struct {
-	QueryCredits 	int 	`json:"query_credits"`
-	ScanCredits 	int 	`json:"scan_credits"`
-	Telnet			bool	`json:"telnet"`
-	Plan			string	`json:"plan"`
-	HTTPS			bool	`json:"https"`
-	Unlocked		bool	`json:unlocked`
+	QueryCredits int    `json:"query_credits"`
+	ScanCredits  int    `json:"scan_credits"`
+	Telnet       bool   `json:"telnet"`
+	Plan         string `json:"plan"`
+	HTTPS        bool   `json:"https"`
+	Unlocked     bool   `json:"unlocked"`
 }
 
 func (s *Client) APIInfo() (*APIInfo, error) {
@@ -22,6 +23,7 @@ func (s *Client) APIInfo() (*APIInfo, error) {
 	}
 	defer res.Body.Close()
 
+	log.Println(res.Body)
 	var ret APIInfo
 	if err := json.NewDecoder(res.Body).Decode(&ret); err != nil {
 		return nil, err
