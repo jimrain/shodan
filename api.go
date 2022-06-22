@@ -23,7 +23,7 @@ func (s *Client) APIInfo() (*APIInfo, error) {
 	}
 	defer res.Body.Close()
 
-	log.Println(res.Body)
+	log.Println("WTF??")
 	var ret APIInfo
 	if err := json.NewDecoder(res.Body).Decode(&ret); err != nil {
 		return nil, err
